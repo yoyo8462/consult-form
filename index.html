@@ -234,7 +234,7 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
     <textarea id="summary" readonly aria-label="填答內容"></textarea>
     <div class="actions">
       <button type="button" id="copy">複製填答內容</button>
-      <button type="button" class="ghost" id="reset">全部清除重填</button>
+      <button type="button" class="ghost" id="clearAll">全部清除重填</button>
       <span class="status" id="status" role="status"></span>
     </div>
   </section>
@@ -347,9 +347,9 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
   });
 
   let armed = false;
-  $('reset').addEventListener('click', () => {
-    if (!armed) { armed = true; $('reset').textContent = '再按一次確認清除'; setTimeout(() => { armed = false; $('reset').textContent = '全部清除重填'; }, 4000); return; }
-    armed = false; $('reset').textContent = '全部清除重填';
+  $('clearAll').addEventListener('click', () => {
+    if (!armed) { armed = true; $('clearAll').textContent = '再按一次確認清除'; setTimeout(() => { armed = false; $('clearAll').textContent = '全部清除重填'; }, 4000); return; }
+    armed = false; $('clearAll').textContent = '全部清除重填';
     f.reset(); $('status').textContent = '已清除';
     try { localStorage.removeItem(KEY); } catch (e) {}
     refresh();
