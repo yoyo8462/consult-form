@@ -73,7 +73,14 @@ button { font: inherit; font-weight: 700; border: none; border-radius: 8px; padd
 button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); font-weight: 500; }
 .status { color: var(--accent); font-weight: 700; min-height: 1.6em; }
 footer { color: var(--muted); font-size: 13px; text-align: center; }
-@media (prefers-reduced-motion: no-preference) { label.opt { transition: background .15s, border-color .15s; } }
+.more { display: grid; gap: 10px; margin-top: 4px; padding: 12px 12px 14px 14px; border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; background: var(--bg); }
+.more-tag { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: .04em; }
+.more .sub { margin-top: 2px; color: var(--ink); }
+@media (prefers-reduced-motion: no-preference) {
+  label.opt { transition: background .15s, border-color .15s; }
+  .more:not([hidden]) { animation: reveal .25s ease-out; }
+  @keyframes reveal { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+}
 </style>
 </head>
 <body>
@@ -81,7 +88,7 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
   <header>
     <div class="eyebrow">郭样鋐會計師｜諮詢前問卷</div>
     <h1>傳承與稅務諮詢｜簡易問卷</h1>
-    <p class="lead">共 12 題，大約 5 分鐘。先讓我了解您的狀況，見面時就能直接談重點。</p>
+    <p class="lead">基本 12 題，依您的回答可能再補充幾題，大約 5 分鐘。先讓我了解您的狀況，見面時就能直接談重點。</p>
   </header>
 
   <div class="notice">
@@ -118,6 +125,23 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
         <label class="opt"><input type="radio" name="abroad" value="有"> 有，國家：<input type="text" id="abroad_t" class="wide" placeholder="例如：美國"></label>
         <label class="opt"><input type="radio" name="abroad" value="暫時不提供（不清楚）"> 暫時不提供（不清楚）</label>
       </div>
+      <div class="more" id="more_abroad" hidden>
+        <div class="more-tag">依您的回答，補充幾題</div>
+        <div class="sub">子女的身分（可複選）</div>
+        <div class="row">
+          <label class="opt"><input type="checkbox" name="fu_abroad_id" value="美國公民"> 美國公民</label>
+          <label class="opt"><input type="checkbox" name="fu_abroad_id" value="綠卡"> 綠卡</label>
+          <label class="opt"><input type="checkbox" name="fu_abroad_id" value="其他國籍"> 其他國籍</label>
+          <label class="opt"><input type="checkbox" name="fu_abroad_id" value="只是長住國外"> 只是長住國外</label>
+          <label class="opt"><input type="checkbox" name="fu_abroad_id" value="不清楚"> 不清楚</label>
+        </div>
+        <div class="sub">未來會回台灣定居嗎？</div>
+        <div class="row">
+          <label class="opt"><input type="radio" name="fu_abroad_back" value="會"> 會</label>
+          <label class="opt"><input type="radio" name="fu_abroad_back" value="不會"> 不會</label>
+          <label class="opt"><input type="radio" name="fu_abroad_back" value="不清楚"> 不清楚</label>
+        </div>
+      </div>
     </div>
     <div class="q">
       <div class="q-title"><span class="q-no">3</span>財富主要來自 <span class="q-hint">（可複選）</span></div>
@@ -141,6 +165,32 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
         <label class="opt"><input type="radio" name="re" value="amt"> 不提供明細，總現值大約 <input type="text" id="re_amt" class="num" inputmode="decimal"> 萬元</label>
         <label class="opt"><input type="radio" name="re" value="暫時不提供（不清楚）"> 暫時不提供（不清楚）</label>
       </div>
+      <div class="more" id="more_re" hidden>
+        <div class="more-tag">依您的回答，補充幾題</div>
+        <div class="sub">大約幾筆</div>
+        <div class="inline"><input type="number" id="fu_re_n" class="short" inputmode="numeric" min="0"> 筆</div>
+        <div class="sub">用途（可複選）</div>
+        <div class="row">
+          <label class="opt"><input type="checkbox" name="fu_re_use" value="自住"> 自住</label>
+          <label class="opt"><input type="checkbox" name="fu_re_use" value="出租"> 出租</label>
+          <label class="opt"><input type="checkbox" name="fu_re_use" value="土地"> 土地</label>
+          <label class="opt"><input type="checkbox" name="fu_re_use" value="公司使用"> 公司使用</label>
+        </div>
+        <div class="sub">大多是什麼時候取得的？</div>
+        <div class="row">
+          <label class="opt"><input type="radio" name="fu_re_year" value="105 年以前"> 105 年以前</label>
+          <label class="opt"><input type="radio" name="fu_re_year" value="105 年以後"> 105 年以後</label>
+          <label class="opt"><input type="radio" name="fu_re_year" value="都有"> 都有</label>
+          <label class="opt"><input type="radio" name="fu_re_year" value="不清楚"> 不清楚</label>
+        </div>
+        <div class="sub">打算怎麼處理（可複選）</div>
+        <div class="row">
+          <label class="opt"><input type="checkbox" name="fu_re_plan" value="出售"> 出售</label>
+          <label class="opt"><input type="checkbox" name="fu_re_plan" value="贈與子女"> 贈與子女</label>
+          <label class="opt"><input type="checkbox" name="fu_re_plan" value="保留到繼承"> 保留到繼承</label>
+          <label class="opt"><input type="checkbox" name="fu_re_plan" value="還沒想"> 還沒想</label>
+        </div>
+      </div>
     </div>
     <div class="q">
       <div class="q-title"><span class="q-no">5</span>金融資產 <span class="q-hint">（存款、股票、基金、債券、外幣）</span></div>
@@ -156,6 +206,24 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
         <label class="opt"><input type="radio" name="ovs" value="沒有"> 沒有</label>
         <label class="opt"><input type="radio" name="ovs" value="amt"> 有，一年大約 <input type="text" id="ovs_amt" class="num" inputmode="decimal"> 萬元</label>
         <label class="opt"><input type="radio" name="ovs" value="暫時不提供（不清楚）"> 暫時不提供（不清楚）</label>
+      </div>
+      <div class="more" id="more_ovs" hidden>
+        <div class="more-tag">依您的回答，補充幾題</div>
+        <div class="sub">海外所得的來源（可複選）</div>
+        <div class="row">
+          <label class="opt"><input type="checkbox" name="fu_ovs_src" value="利息"> 利息</label>
+          <label class="opt"><input type="checkbox" name="fu_ovs_src" value="股利／基金配息"> 股利／基金配息</label>
+          <label class="opt"><input type="checkbox" name="fu_ovs_src" value="租金"> 租金</label>
+          <label class="opt"><input type="checkbox" name="fu_ovs_src" value="出售海外資產"> 出售海外資產</label>
+          <label class="opt"><input type="checkbox" name="fu_ovs_src" value="境外資金匯回"> 境外資金匯回</label>
+          <label class="opt"><input type="checkbox" name="fu_ovs_src" value="其他" data-other="fu_ovs_src_t"> 其他：<input type="text" id="fu_ovs_src_t" class="wide"></label>
+        </div>
+        <div class="sub">過去有沒有申報過海外所得？</div>
+        <div class="row">
+          <label class="opt"><input type="radio" name="fu_ovs_filed" value="有"> 有</label>
+          <label class="opt"><input type="radio" name="fu_ovs_filed" value="沒有"> 沒有</label>
+          <label class="opt"><input type="radio" name="fu_ovs_filed" value="不清楚"> 不清楚</label>
+        </div>
       </div>
     </div>
     <div class="q">
@@ -174,12 +242,27 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
         <label class="opt"><input type="checkbox" name="cotype" value="境外公司"> 境外公司</label>
         <label class="opt"><input type="checkbox" name="cotype" value="其他" data-other="cotype_t"> 其他：<input type="text" id="cotype_t" class="wide"></label>
       </div>
+      <div class="more" id="more_co" hidden>
+        <div class="more-tag">依您的回答，補充幾題</div>
+        <div class="sub">您在公司的角色（可複選）</div>
+        <div class="row">
+          <label class="opt"><input type="checkbox" name="fu_co_role" value="負責人"> 負責人</label>
+          <label class="opt"><input type="checkbox" name="fu_co_role" value="股東"> 股東</label>
+          <label class="opt"><input type="checkbox" name="fu_co_role" value="董事"> 董事</label>
+        </div>
+        <div class="sub">公司名下有沒有不動產？</div>
+        <div class="row">
+          <label class="opt"><input type="radio" name="fu_co_re" value="有"> 有</label>
+          <label class="opt"><input type="radio" name="fu_co_re" value="沒有"> 沒有</label>
+          <label class="opt"><input type="radio" name="fu_co_re" value="不清楚"> 不清楚</label>
+        </div>
+      </div>
     </div>
     <div class="q">
       <div class="q-title"><span class="q-no">8</span>保險與負債</div>
-      <div class="sub">保險（壽險、年金險、投資型保單）</div>
+      <div class="sub">保險：您有沒有<b>以自己為要保人</b>的保險？（壽險、年金險、投資型保單）</div>
       <div class="opts">
-        <label class="opt"><input type="radio" name="ins" value="沒有特別規劃"> 沒有特別規劃</label>
+        <label class="opt"><input type="radio" name="ins" value="沒有"> 沒有</label>
         <label class="opt"><input type="radio" name="ins" value="有，願意提供保單明細"> 有，願意提供保單明細</label>
         <label class="opt"><input type="radio" name="ins" value="有，但明細暫時不提供"> 有，但明細暫時不提供</label>
         <label class="opt"><input type="radio" name="ins" value="暫時不提供（不清楚）"> 暫時不提供（不清楚）</label>
@@ -189,6 +272,16 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
         <label class="opt"><input type="radio" name="debt" value="沒有"> 沒有</label>
         <label class="opt"><input type="radio" name="debt" value="amt"> 有，大約 <input type="text" id="debt_amt" class="num" inputmode="decimal"> 萬元</label>
         <label class="opt"><input type="radio" name="debt" value="暫時不提供（不清楚）"> 暫時不提供（不清楚）</label>
+      </div>
+      <div class="more" id="more_debt" hidden>
+        <div class="more-tag">依您的回答，補充一題</div>
+        <div class="sub">借款用途（可複選）</div>
+        <div class="row">
+          <label class="opt"><input type="checkbox" name="fu_debt_use" value="房貸"> 房貸</label>
+          <label class="opt"><input type="checkbox" name="fu_debt_use" value="投資理財（股票、保單質押）"> 投資理財（股票、保單質押）</label>
+          <label class="opt"><input type="checkbox" name="fu_debt_use" value="事業週轉"> 事業週轉</label>
+          <label class="opt"><input type="checkbox" name="fu_debt_use" value="其他" data-other="fu_debt_use_t"> 其他：<input type="text" id="fu_debt_use_t" class="wide"></label>
+        </div>
       </div>
     </div>
   </section>
@@ -265,6 +358,20 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
     });
   });
 
+  // 漸進式追問：關鍵答案出現時才展開
+  const MORE = {
+    more_abroad: () => radio('abroad') === '有',
+    more_re: () => ['願意提供不動產現值表', 'amt'].includes(radio('re')),
+    more_ovs: () => radio('ovs') === 'amt',
+    more_co: () => radio('co') === 'amt',
+    more_debt: () => radio('debt') === 'amt',
+  };
+  function updateMore() {
+    for (const id in MORE) { const on = MORE[id](); if ($(id).hidden === on) $(id).hidden = !on; }
+  }
+  // 追問有答案才輸出一行，否則不出現
+  function fu(L, id, label, text) { if (!$(id).hidden && text) L.push('   → ' + label + '：' + text); }
+
   function amtLine(name, amtId, unitLabel) {
     const v = radio(name);
     if (!v) return '（未填）';
@@ -287,15 +394,26 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
     L.push('2. 家庭成員：' + (fam.join('、') || '（未填）'));
     const ab = radio('abroad');
     L.push('   子女外國籍／住國外：' + (ab === '有' ? '有' + (val('abroad_t') ? '（' + val('abroad_t') + '）' : '') : (ab || '（未填）')));
+    fu(L, 'more_abroad', '子女身分', checks('fu_abroad_id').join('、'));
+    fu(L, 'more_abroad', '未來回台定居', radio('fu_abroad_back'));
     L.push('3. 財富主要來自：' + (checks('src').join('、') || '（未填）'));
     L.push('4. 不動產：' + amtLine('re', 're_amt', a => '總現值大約 ' + a));
+    fu(L, 'more_re', '筆數', val('fu_re_n') && val('fu_re_n') + ' 筆');
+    fu(L, 'more_re', '用途', checks('fu_re_use').join('、'));
+    fu(L, 'more_re', '取得時間', radio('fu_re_year'));
+    fu(L, 'more_re', '打算', checks('fu_re_plan').join('、'));
     L.push('5. 金融資產：' + amtLine('fin', 'fin_amt', a => '總額大約 ' + a));
     L.push('6. 海外所得：' + amtLine('ovs', 'ovs_amt', a => '有，一年大約 ' + a));
+    fu(L, 'more_ovs', '來源', checks('fu_ovs_src').join('、'));
+    fu(L, 'more_ovs', '過去申報', radio('fu_ovs_filed'));
     let co = amtLine('co', 'co_amt', a => '有 ' + (val('co_n') || '?') + ' 家，持股價值大約 ' + a);
     const ct = checks('cotype'); if (ct.length) co += '；類型：' + ct.join('、');
     L.push('7. 公司或事業：' + co);
-    L.push('8. 保險：' + (radio('ins') || '（未填）'));
+    fu(L, 'more_co', '角色', checks('fu_co_role').join('、'));
+    fu(L, 'more_co', '公司名下不動產', radio('fu_co_re'));
+    L.push('8. 保險（自己為要保人）：' + (radio('ins') || '（未填）'));
     L.push('   負債：' + amtLine('debt', 'debt_amt', a => '有，大約 ' + a));
+    fu(L, 'more_debt', '借款用途', checks('fu_debt_use').join('、'));
     const care = checks('care');
     L.push('9. 最想談的事：' + (care.length ? '\n   - ' + care.join('\n   - ') : '（未填）'));
     L.push('10. 已做過的安排：' + (checks('done').join('、') || '（未填）'));
@@ -323,6 +441,7 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
   }
 
   function refresh() {
+    updateMore();
     $('summary').value = build();
     try { localStorage.setItem(KEY, JSON.stringify(snapshot())); } catch (e) {}
   }
