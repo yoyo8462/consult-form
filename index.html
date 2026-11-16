@@ -7,7 +7,7 @@
 <meta name="description" content="傳承與稅務諮詢前的簡易問卷，填完複製內容回傳即可。">
 <title>傳承稅務諮詢問卷</title>
 <style>
-/* 版面：單欄、手機優先；快速版 4 題在上，細節版按了才展開，只出現跟快速版答案有關的段落 */
+/* 版面：單欄、手機優先；開頭先問最想談的事，再接快速版 3 題，細節版按了才展開，只出現跟快速版答案有關的段落 */
 :root {
   --bg: #F3F5F4;
   --paper: #FFFFFF;
@@ -57,6 +57,8 @@ section.card > h2 .h2-hint { font-family: var(--font-body); font-size: 14px; fon
 label.opt { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
 label.opt:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
 label.opt > input[type=radio], label.opt > input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); margin: 0; flex: none; }
+label.opt > span:not(.inline) { flex: 1 1 0; min-width: 0; }
+.nw { white-space: nowrap; }
 .inline { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 input[type=text], input[type=number], textarea {
   font: inherit; color: var(--ink); background: var(--paper);
@@ -101,36 +103,37 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
 <div class="wrap">
   <header>
     <div class="eyebrow">郭样鋐會計師｜諮詢前問卷</div>
-    <h1>傳承與稅務諮詢｜諮詢前問卷</h1>
-    <p class="lead">第一次諮詢，給我大概的數字就可以了，不確定的空白也沒關係，大約 1 分鐘。</p>
+    <h1><span class="nw">傳承與稅務規劃｜</span><span class="nw">諮詢前問卷</span></h1>
+    <p class="lead">為使初次諮詢更聚焦，請先提供概略資訊；尚未確定的項目可留白。快速版約需 1 分鐘。</p>
   </header>
-
-  <div class="notice">
-    <p>不需要填身分證字號、帳號或地址。</p>
-    <p>您填的內容只會留在您自己的手機或電腦，不會自動傳出。填完按最下面的「複製填答內容」，貼到 LINE 傳給您的理財專員即可。</p>
-  </div>
 
   <form id="f" autocomplete="off">
   <div style="display:grid;gap:18px">
 
-  <!-- ===== 快速版 4 題 ===== -->
+  <!-- ===== 開頭先問：這次最想談的事 ===== -->
   <section class="card">
-    <h2>快速版<span class="h2-hint">4 題，約 1 分鐘</span></h2>
-
-    <div class="q">
-      <div class="q-title"><span class="q-no">1</span>這次最想談的事 <span class="q-hint">（可複選）</span></div>
+    <h2>這次最想談的事<span class="h2-hint">可複選</span></h2>
       <div class="opts">
-        <label class="opt"><input type="checkbox" name="care" value="節稅" data-short="節稅"> <span><b>節稅</b>：減少將來的遺產稅、贈與稅</span></label>
+        <label class="opt"><input type="checkbox" name="care" value="稅務規劃" data-short="稅務規劃"> <span><b>稅務規劃</b>：遺產稅、贈與稅的整體安排</span></label>
         <label class="opt"><input type="checkbox" name="care" value="傳承" data-short="傳承"> <span><b>傳承</b>：財產怎麼交給下一代，子女之間要公平</span></label>
         <label class="opt"><input type="checkbox" name="care" value="事業接班" data-short="事業接班"> <span><b>事業接班</b>：公司要交給誰、怎麼交</span></label>
         <label class="opt"><input type="checkbox" name="care" value="退休與照顧" data-short="退休與照顧"> <span><b>退休與照顧</b>：自己的生活費，以及萬一失能失智時由誰管財產</span></label>
         <label class="opt"><input type="checkbox" name="care" value="資產保護" data-short="資產保護"> <span><b>資產保護</b>：怕子女亂花錢、婚變，或被債務牽連</span></label>
         <label class="opt"><input type="checkbox" name="care" value="其他" data-other="care_t"> 其他：<input type="text" id="care_t" class="wide"></label>
       </div>
-    </div>
+  </section>
+
+  <div class="notice">
+    <p>本問卷不需填寫身分證字號、帳號、地址等個人識別資料。</p>
+    <p>您填的內容只會留在您自己的手機或電腦，不會自動傳出。填完按最下面的「複製填答內容」，貼到 LINE 傳給您的理財專員即可。</p>
+  </div>
+
+  <!-- ===== 快速版 3 題 ===== -->
+  <section class="card">
+    <h2>快速版<span class="h2-hint">3 題，約 1 分鐘</span></h2>
 
     <div class="q">
-      <div class="q-title"><span class="q-no">2</span>您和家人</div>
+      <div class="q-title"><span class="q-no">1</span>家庭概況</div>
       <div class="fam-grid">
         <div><span class="fam-label">年齡</span><span class="inline"><input type="number" id="age" class="short" inputmode="numeric" min="0" max="120"> 歲</span></div>
         <div><span class="fam-label">配偶</span>
@@ -142,7 +145,7 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
     </div>
 
     <div class="q">
-      <div class="q-title"><span class="q-no">3</span>大概的金額</div>
+      <div class="q-title"><span class="q-no">2</span>大概的金額</div>
       <div class="q-hint">單位：萬元；空白＝暫時不提供，沒有請填 0</div>
       <div class="amt-list">
         <div class="amt-row"><label class="amt-name" for="re_amt">不動產總值</label><span class="inline"><input type="text" id="re_amt" class="num" inputmode="decimal"> 萬元</span></div>
@@ -159,7 +162,7 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
     </div>
 
     <div class="q">
-      <div class="q-title"><span class="q-no">4</span>想先問的問題，或其他想讓我知道的事</div>
+      <div class="q-title"><span class="q-no">3</span>想先問的問題，或其他想讓我知道的事</div>
       <textarea id="ask" placeholder="例如：房子要現在過戶給孩子，還是留著繼承比較好？"></textarea>
     </div>
   </section>
@@ -424,7 +427,7 @@ footer { color: var(--muted); font-size: 13px; text-align: center; }
 
   function build() {
     const L = [];
-    L.push('【傳承與稅務諮詢｜諮詢前問卷】');
+    L.push('【傳承與稅務規劃｜諮詢前問卷】');
     L.push('');
     L.push('【快速版】');
     L.push('最想談：' + (checks('care').join('、') || '（未填）'));
